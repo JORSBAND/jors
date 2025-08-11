@@ -12,17 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ініціалізація Firebase
     if (typeof firebase !== 'undefined' && !firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
     }
     const db = firebase.firestore();
 
     // Функція для підрахунку переглядів
     const incrementViewCount = () => {
-        // Використовуємо шлях до сторінки як її унікальний ідентифікатор
+        if (!db) return;
         const pageId = window.location.pathname.replace(/[^a-z0-9]/gi, '_') || 'home';
         const pageViewsRef = db.collection('page_views').doc(pageId);
 
-        // Використовуємо транзакцію для безпечного оновлення лічильника
         db.runTransaction((transaction) => {
             return transaction.get(pageViewsRef).then((doc) => {
                 let newCount = 1;
@@ -33,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return newCount;
             });
         }).then((newCount) => {
-            // Оновлюємо лічильник на сторінці
             const counterElement = document.getElementById('view-counter');
             const counterContainer = document.getElementById('view-counter-container');
             if(counterElement && counterContainer) {
@@ -45,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     
-    // Викликаємо функцію підрахунку переглядів при завантаженні сторінки
     incrementViewCount();
-
 
     // Об'єкт для перекладів
     const translations = {
@@ -88,6 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
             'privacy-heading4': 'Зміни в політиці',
             'privacy-p4': 'Ми можемо оновлювати цю політику конфіденційності. Усі зміни будуть публікуватися на цій сторінці.',
             'footer-text': '&copy; 2025 Гурт JORS. Всі права захищено. | <a href="privacy.html">Політика конфіденційності</a>',
+            'band-member-oleksandr': 'Олександр',
+            'band-member-david': 'Давид',
+            'band-member-yaroslav': 'Ярослав',
             'band-info-oleksandr': 'Олександр — ритм-гітарист, співзасновник гурту. Його рифи створюють міцний фундамент для нашого звучання.',
             'band-info-david': 'Давид — соло-гітарист та один із засновників. Його віртуозні соло прорізають простір, даруючи незабутні емоції.',
             'band-info-yaroslav': 'Ярослав — наш потужний барабанщик. Його енергійні ритми тримають увесь гурт і заряджають публіку.',
@@ -137,6 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
             'privacy-heading4': 'Changes to the Policy',
             'privacy-p4': 'We may update this privacy policy. All changes will be published on this page.',
             'footer-text': '&copy; 2025 JORS Band. All rights reserved. | <a href="privacy.html">Privacy Policy</a>',
+            'band-member-oleksandr': 'Oleksandr',
+            'band-member-david': 'David',
+            'band-member-yaroslav': 'Yaroslav',
             'band-info-oleksandr': 'Oleksandr is the rhythm guitarist and co-founder. His riffs provide a solid foundation for our sound.',
             'band-info-david': 'David is the lead guitarist and one of the founders. His virtuosic solos cut through the air, delivering unforgettable emotions.',
             'band-info-yaroslav': 'Yaroslav is our powerful drummer. His energetic rhythms hold the whole band together and electrify the audience.',
@@ -150,21 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
             'views': 'Views'
         }
     };
-
-    // Дані для галереї зображень
-    const images = [
-        "images/band1.jpg",
-        "images/band2.jpg",
-        "images/band3.jpg",
-        "images/band4.jpg"
-    ];
-
-    // Дані для каруселі учасників
-    const bandImages = [
-        { src: "images/bandor.JPG", id: "oleksandr" },
-        { src: "images/bandd.JPG", id: "david" },
-        { src: "images/bandy.JPG", id: "yaroslav" }
-    ];
 
     // Функція для встановлення мови
     const setLanguage = (lang) => {
@@ -182,40 +173,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        const bandImageElement = document.getElementById("band-image");
-        const bandInfoTextElement = document.getElementById("band-info-text");
-        if (bandImageElement && bandInfoTextElement) {
-            const currentImageFileName = bandImageElement.src.split('/').pop();
-            const currentBandMember = bandImages.find(member => member.src.includes(currentImageFileName));
-            
-            if (currentBandMember) {
-                bandInfoTextElement.textContent = translations[lang][`band-info-${currentBandMember.id}`];
-            } else {
-                if (!bandImages.some(member => bandImageElement.src.includes(member.src))) {
-                     bandImageElement.src = bandImages[0].src;
-                     bandInfoTextElement.textContent = translations[lang][`band-info-${bandImages[0].id}`];
-                }
-            }
-        }
-
-        const countdownLabels = document.querySelectorAll('.countdown-label');
-        countdownLabels.forEach(label => {
-            const key = label.getAttribute('data-key');
+        // Оновлення заголовка сторінки
+        const pageTitle = document.querySelector('title[data-key]');
+        if (pageTitle) {
+            const key = pageTitle.getAttribute('data-key');
             if (translations[lang] && translations[lang][key]) {
-                label.textContent = translations[lang][key];
+                document.title = translations[lang][key];
             }
-        });
-
-        const musicTitleElement = document.querySelector('title[data-key="music"]');
-        if (musicTitleElement) {
-            musicTitleElement.textContent = translations[lang]['music'];
         }
     };
 
-    // Ініціалізація мови та теми при завантаженні сторінки
+    // Ініціалізація мови
     const savedLang = localStorage.getItem('lang') || 'uk';
     setLanguage(savedLang);
-    document.body.classList.add('dark-theme');
 
     // Перемикач мови
     const langToggleBtn = document.getElementById('lang-toggle-btn');
@@ -242,85 +212,71 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    
+    // Логіка Слайдера Галереї
+    const slider = document.querySelector('.slider');
+    if (slider) {
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.slider-prev');
+        const nextBtn = document.querySelector('.slider-next');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        let currentIndex = 0;
 
-    // Логіка Галереї зображень
-    let currentImageIndex = 0;
-    const galleryImage = document.getElementById("gallery-image");
-    const galleryPrevButton = document.querySelector(".gallery .prev-button");
-    const galleryNextButton = document.querySelector(".gallery .next-button");
-
-    if (galleryImage) {
-        const updateGalleryImage = () => {
-            galleryImage.classList.add('fade-out');
-            setTimeout(() => {
-                galleryImage.src = images[currentImageIndex];
-                galleryImage.classList.remove('fade-out');
-                galleryImage.classList.add('fade-in');
-            }, 300);
-
-            galleryImage.addEventListener('animationend', function handler() {
-                galleryImage.classList.remove('fade-in');
-                galleryImage.removeEventListener('animationend', handler);
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
             });
-        };
-
-        if (galleryPrevButton) {
-            galleryPrevButton.addEventListener("click", () => {
-                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-                updateGalleryImage();
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
             });
+            currentIndex = index;
         }
-        if (galleryNextButton) {
-            galleryNextButton.addEventListener("click", () => {
-                currentImageIndex = (currentImageIndex + 1) % images.length;
-                updateGalleryImage();
+
+        prevBtn.addEventListener('click', () => {
+            let newIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(newIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            let newIndex = (currentIndex + 1) % slides.length;
+            showSlide(newIndex);
+        });
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                showSlide(parseInt(thumb.dataset.slide));
             });
-        }
-        updateGalleryImage();
+        });
+
+        // Ініціалізація Luminous Lightbox
+        new LuminousGallery(document.querySelectorAll('.gallery-item'));
+        
+        showSlide(0);
     }
 
-    // Карусель учасників - Логіка
-    let currentIndex = 0;
-    const bandImageElement = document.getElementById("band-image");
-    const bandInfoTextElement = document.getElementById("band-info-text");
+    // Логіка Акордеону для Учасників
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    if (accordionItems.length > 0) {
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            const content = item.querySelector('.accordion-content');
 
-    if (bandImageElement && bandInfoTextElement) {
-        const updateCarousel = () => {
-            bandImageElement.classList.add('fade-out');
-            setTimeout(() => {
-                bandImageElement.src = bandImages[currentIndex].src;
-                const currentLang = localStorage.getItem('lang') || 'uk';
-                bandInfoTextElement.textContent = translations[currentLang][`band-info-${bandImages[currentIndex].id}`];
-                bandImageElement.classList.remove('fade-out');
-                bandImageElement.classList.add('fade-in');
-            }, 300);
+            header.addEventListener('click', () => {
+                const isActive = header.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
 
-            bandImageElement.addEventListener('animationend', function handler() {
-                bandImageElement.classList.remove('fade-in');
-                bandImageElement.removeEventListener('animationend', handler);
+                // Open the clicked one if it wasn't active
+                if (!isActive) {
+                    header.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
             });
-        };
-
-        const prevBandButton = document.querySelector(".band-carousel .prev-button");
-        const nextBandButton = document.querySelector(".band-carousel .next-button");
-
-        if (prevBandButton) {
-            prevBandButton.addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + bandImages.length) % bandImages.length;
-                updateCarousel();
-            });
-        }
-        if (nextBandButton) {
-            nextBandButton.addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % bandImages.length;
-                updateCarousel();
-            });
-        }
-        if (bandImageElement.src.includes("bando.jpg")) {
-            currentIndex = 0;
-        }
-        updateCarousel();
+        });
     }
+
 
     // Логіка таймера зворотного відліку
     const countdownDate = new Date("Aug 15, 2025 00:00:00").getTime();
@@ -357,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     let countdownInterval;
-    if (window.location.pathname.includes('music.html')) {
+    if (document.body.classList.contains('music-page')) {
         updateCountdown();
         countdownInterval = setInterval(updateCountdown, 1000);
     }
@@ -388,6 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
             showEventSlide(currentEventIndex);
         });
 
-        showEventSlide(currentEventIndex); // Показати перший слайд
+        showEventSlide(currentEventIndex);
     }
 });
