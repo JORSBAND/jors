@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-member-yaroslav': 'Ярослав',
             'band-member-lyubomyr': 'Любомир',
             'band-info-oleksandr': 'Олександр — ритм-гітарист, засновник гурту. Його рифи створюють міцний фундамент для нашого звучання.',
-            'band-info-david': 'Давид — соло-гітарист та один із засновників. Його віртуозні соло прорізають простір, даруючи незабутні емоції.',
+            'band-info-david': 'Давид — соло-гітарист і також засновник. Його віртуозні соло прорізають простір, даруючи незабутні емоції.',
             'band-info-yaroslav': 'Ярослав — наш потужний барабанщик. Його енергійні ритми тримають увесь гурт і заряджають публіку.',
             'band-info-lyubomyr': 'Любомир — наш крутий басист. Його потужні басові лінії додають нашій музиці глибини та драйву.',
             'events-title': 'Найближчі заходи',
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-member-yaroslav': 'Yaroslav',
             'band-member-lyubomyr': 'Lyubomyr',
             'band-info-oleksandr': 'Oleksandr is the rhythm guitarist and founder. His riffs provide a solid foundation for our sound.',
-            'band-info-david': 'David is the lead guitarist and one of the founders. His virtuosic solos cut through the air, delivering unforgettable emotions.',
+            'band-info-david': 'David is the lead guitarist and also a founder. His virtuosic solos cut through the air, delivering unforgettable emotions.',
             'band-info-yaroslav': 'Yaroslav is our powerful drummer. His energetic rhythms hold the whole band together and electrify the audience.',
             'band-info-lyubomyr': 'Lyubomyr is our cool bassist. His powerful bass lines add depth and drive to our music.',
             'events-title': 'Upcoming Events',
@@ -227,11 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 showSlide(parseInt(thumb.dataset.slide));
             });
         });
-
-        // Ініціалізація Luminous Lightbox
-        if (typeof LuminousGallery !== 'undefined') {
-            new LuminousGallery(document.querySelectorAll('.gallery-item'));
-        }
         
         showSlide(0);
     }
