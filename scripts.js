@@ -64,12 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
             'gallery-title': 'Галерея',
             'gallery-subtitle': 'Дивіться фотографії та моменти гурту JORS!',
             'music-title': 'Музика',
-            'music-subtitle': 'Скоро виходить альбом HOPEKILLER!',
-            'album-announcement': 'Скоро виходить альбом HOPEKILLER!',
-            'countdown-days': 'Дні',
-            'countdown-hours': 'Години',
-            'countdown-minutes': 'Хвилини',
-            'countdown-seconds': 'Секунди',
+            'music-subtitle': 'Новий реліз HOPEKILLER вже доступний!',
+            'album-announcement': 'Новий Реліз',
             'contacts-title': 'Контакти',
             'contacts-email': 'Електронна пошта',
             'instagram-title': 'Instagram',
@@ -95,12 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-info-david': 'Давид — соло-гітарист та один із засновників. Його віртуозні соло прорізають простір, даруючи незабутні емоції.',
             'band-info-yaroslav': 'Ярослав — наш потужний барабанщик. Його енергійні ритми тримають увесь гурт і заряджають публіку.',
             'events-title': 'Найближчі заходи',
-            'event1-title': 'Стадіон Ювілейний',
-            'event1-date': '12.08.2025 о 17:00',
-            'event1-entry': 'Вхід безкоштовний',
-            'event2-title': 'BunkerPub',
-            'event2-date': '15.08.2025',
-            'event2-entry': 'Потрібна бронь',
+            'event3-title': 'День міста',
+            'event3-date': '14.09.2025',
+            'event3-location': 'Дім культури',
+            'event3-entry': 'Вхід безкоштовний',
             'views': 'Переглядів'
         },
         'en': {
@@ -116,12 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
             'gallery-title': 'Gallery',
             'gallery-subtitle': 'See photos and moments of the JORS band!',
             'music-title': 'Music',
-            'music-subtitle': 'Album HOPEKILLER coming soon!',
-            'album-announcement': 'Album HOPEKILLER coming soon!',
-            'countdown-days': 'Days',
-            'countdown-hours': 'Hours',
-            'countdown-minutes': 'Minutes',
-            'countdown-seconds': 'Seconds',
+            'music-subtitle': 'New release HOPEKILLER is out now!',
+            'album-announcement': 'New Release',
             'contacts-title': 'Contacts',
             'contacts-email': 'Email',
             'instagram-title': 'Instagram',
@@ -147,12 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-info-david': 'David is the lead guitarist and one of the founders. His virtuosic solos cut through the air, delivering unforgettable emotions.',
             'band-info-yaroslav': 'Yaroslav is our powerful drummer. His energetic rhythms hold the whole band together and electrify the audience.',
             'events-title': 'Upcoming Events',
-            'event1-title': 'Yuvileinyi Stadium',
-            'event1-date': '12.08.2025 at 17:00',
-            'event1-entry': 'Free admission',
-            'event2-title': 'BunkerPub',
-            'event2-date': '15.08.2025',
-            'event2-entry': 'Reservation required',
+            'event3-title': 'City Day',
+            'event3-date': '14.09.2025',
+            'event3-location': 'House of Culture',
+            'event3-entry': 'Free admission',
             'views': 'Views'
         }
     };
@@ -277,53 +265,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    // Логіка таймера зворотного відліку
-    const countdownDate = new Date("Aug 15, 2025 00:00:00").getTime();
-    const updateCountdown = () => {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        const daysSpan = document.getElementById("days");
-        const hoursSpan = document.getElementById("hours");
-        const minutesSpan = document.getElementById("minutes");
-        const secondsSpan = document.getElementById("seconds");
-
-        if (daysSpan) daysSpan.textContent = String(days).padStart(2, '0');
-        if (hoursSpan) hoursSpan.textContent = String(hours).padStart(2, '0');
-        if (minutesSpan) minutesSpan.textContent = String(minutes).padStart(2, '0');
-        if (secondsSpan) secondsSpan.textContent = String(seconds).padStart(2, '0');
-
-        if (distance < 0) {
-            clearInterval(countdownInterval);
-            const albumAnnouncement = document.querySelector('.album-announcement');
-            if (albumAnnouncement) {
-                albumAnnouncement.textContent = "Альбом HOPEKILLER вже вийшов!";
-            }
-            if (daysSpan) daysSpan.textContent = "00";
-            if (hoursSpan) hoursSpan.textContent = "00";
-            if (minutesSpan) minutesSpan.textContent = "00";
-            if (secondsSpan) secondsSpan.textContent = "00";
-        }
-    };
-
-    let countdownInterval;
-    if (document.body.classList.contains('music-page')) {
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    }
-
     // Логіка каруселі подій
     const eventSlides = document.querySelectorAll(".event-slide");
-    if (eventSlides.length > 0) {
+    if (eventSlides.length > 1) { // Only run if more than one slide
         let currentEventIndex = 0;
         const prevEventButton = document.querySelector(".prev-event-button");
         const nextEventButton = document.querySelector(".next-event-button");
+
+        // Show buttons if carousel is active
+        prevEventButton.style.display = 'block';
+        nextEventButton.style.display = 'block';
 
         const showEventSlide = (index) => {
             eventSlides.forEach((slide, i) => {
