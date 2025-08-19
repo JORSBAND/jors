@@ -32,33 +32,29 @@
     <main>
         <section class="hero">
             <h2 data-key="music-title">Музика</h2>
-            <p data-key="music-subtitle">Скоро виходить альбом HOPEKILLER!</p>
+            <p data-key="music-subtitle">Новий реліз HOPEKILLER вже доступний!</p>
         </section>
 
         <section class="music-release-section">
-            <h3 class="album-announcement" data-key="album-announcement">Скоро виходить альбом HOPEKILLER!</h3>
+            <h3 class="album-announcement" data-key="album-announcement">Новий Реліз</h3>
             
             <div class="album-art-container">
                 <img src="images/album_placeholder.jpg" alt="Album Cover Placeholder" id="album-photo">
             </div>
 
-            <div class="countdown-container">
-                <div class="countdown-item">
-                    <span id="days">00</span>
-                    <div class="countdown-label" data-key="countdown-days">Дні</div>
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span>
-                    <div class="countdown-label" data-key="countdown-hours">Години</div>
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    <div class="countdown-label" data-key="countdown-minutes">Хвилини</div>
-                </div>
-                <div class="countdown-item" id="seconds-countdown-item">
-                    <span id="seconds">00</span>
-                    <div class="countdown-label" data-key="countdown-seconds">Секунди</div>
-                </div>
+            <div class="streaming-links">
+                <a href="https://open.spotify.com/album/2zbrsBpiTZFqtUXn7Pcyi7?si=JCDGjRIkT8yTr3_dlfnZig" target="_blank" class="streaming-link spotify">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.925 17.314c-.2.314-.56.414-.875.214-2.583-1.571-5.833-1.928-9.725-1.057a.5.5 0 0 1-.55-.543c.05-.286.338-.486.625-.543 4.25-.928 7.817-.528 10.65 1.2.3.186.4.557.214.875zm1.2-2.7c-.25.386-.7.5-1.083.25-2.9-1.8-7.25-2.343-10.75-1.286a.625.625 0 0 1-.7-.7c.063-.35.425-.586.788-.65 3.886-1.157 8.717-.557 11.95 1.543.387.243.5.7.25 1.086zm.133-2.886c-3.467-2.1-9.133-2.3-12.541-1.257a.75.75 0 0 1-.834-.828c.083-.428.525-.714.95-.785 3.85-.928 10.008-.686 13.891 1.6.467.271.617.857.342 1.314a1.003 1.003 0 0 1-1.308.356z"/></svg>
+                    <span>Spotify</span>
+                </a>
+                <a href="https://music.youtube.com/playlist?list=OLAK5uy_mlA4jli5AR3p9-o5c8MYHgoFb9b-69qrc&si=eGnajQ1YDCH5Ebwe" target="_blank" class="streaming-link youtube-music">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7.27a5.27 5.27 0 1 0 5.27 5.27A5.27 5.27 0 0 0 12 7.27zm0 8.54a3.27 3.27 0 1 1 3.27-3.27 3.27 3.27 0 0 1-3.27 3.27zm0-14.54A10.73 10.73 0 1 0 22.73 12 10.73 10.73 0 0 0 12 1.27zm0 19.46A8.73 8.73 0 1 1 20.73 12 8.73 8.73 0 0 1 12 20.73zM12 10a2 2 0 1 0 2 2 2 2 0 0 0-2-2z"/></svg>
+                    <span>YT Music</span>
+                </a>
+                <a href="https://music.apple.com/ua/album/hopekiller/1833096703?l=uk" target="_blank" class="streaming-link apple-music">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 7.155c-.81 0-1.58.31-2.16.88-.58.57-.9 1.34-.9 2.15s.32 1.58.9 2.15c.58.57 1.35.88 2.16.88s1.58-.31 2.16-.88c.58-.57.9-1.34.9-2.15s-.32-1.58-.9-2.15c-.58-.57-1.35-.88-2.16-.88zm0-2.01c1.3 0 2.5.5 3.4 1.4s1.4 2.1 1.4 3.4c0 1.3-.5 2.5-1.4 3.4s-2.1 1.4-3.4 1.4-2.5-.5-3.4-1.4-1.4-2.1-1.4-3.4c0-1.3.5-2.5 1.4-3.4s2.1-1.4 3.4-1.4zm-.008 15.855c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm0-20c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11z"/></svg>
+                    <span>Apple Music</span>
+                </a>
             </div>
         </section>
 
@@ -67,26 +63,18 @@
             <div class="events-carousel">
                 <div class="event-slide active-slide">
                     <div class="event-poster">
-                        <img src="images/posterdm.jpg" alt="Event Poster 1">
+                        <img src="images/posterdm.jpg" alt="День міста постер">
                     </div>
                     <div class="event-details">
-                        <h4 data-key="event1-title">Стадіон Ювілейний</h4>
-                        <p data-key="event1-date">12.08.2025 о 17:00</p>
-                        <p data-key="event1-entry">Вхід безкоштовний</p>
+                        <h4 data-key="event3-title">День міста</h4>
+                        <p data-key="event3-date">14.09.2025</p>
+                        <p data-key="event3-location">Дім культури</p>
+                        <p data-key="event3-entry">Вхід безкоштовний</p>
                     </div>
                 </div>
-                <div class="event-slide">
-                    <div class="event-poster">
-                        <img src="images/posterbp.jpg" alt="Event Poster 2">
-                    </div>
-                    <div class="event-details">
-                        <h4 data-key="event2-title">BunkerPub</h4>
-                        <p data-key="event2-date">15.08.2025</p>
-                        <p data-key="event2-entry">Потрібна бронь</p>
-                    </div>
-                </div>
-                <button class="prev-event-button control-button">&lt;</button>
-                <button class="next-event-button control-button">&gt;</button>
+                <!-- Buttons are hidden via CSS since there's only one event -->
+                <button class="prev-event-button control-button" style="display: none;">&lt;</button>
+                <button class="next-event-button control-button" style="display: none;">&gt;</button>
             </div>
         </section>
     </main>
@@ -96,4 +84,3 @@
     </footer>
 </body>
 </html>
-
