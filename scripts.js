@@ -87,9 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-member-oleksandr': 'Олександр',
             'band-member-david': 'Давид',
             'band-member-yaroslav': 'Ярослав',
-            'band-info-oleksandr': 'Олександр — ритм-гітарист, співзасновник гурту. Його рифи створюють міцний фундамент для нашого звучання.',
+            'band-member-lyubomyr': 'Любомир',
+            'band-info-oleksandr': 'Олександр — ритм-гітарист, засновник гурту. Його рифи створюють міцний фундамент для нашого звучання.',
             'band-info-david': 'Давид — соло-гітарист та один із засновників. Його віртуозні соло прорізають простір, даруючи незабутні емоції.',
             'band-info-yaroslav': 'Ярослав — наш потужний барабанщик. Його енергійні ритми тримають увесь гурт і заряджають публіку.',
+            'band-info-lyubomyr': 'Любомир — наш крутий басист. Його потужні басові лінії додають нашій музиці глибини та драйву.',
             'events-title': 'Найближчі заходи',
             'event3-title': 'День міста',
             'event3-date': '14.09.2025',
@@ -133,9 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-member-oleksandr': 'Oleksandr',
             'band-member-david': 'David',
             'band-member-yaroslav': 'Yaroslav',
-            'band-info-oleksandr': 'Oleksandr is the rhythm guitarist and co-founder. His riffs provide a solid foundation for our sound.',
+            'band-member-lyubomyr': 'Lyubomyr',
+            'band-info-oleksandr': 'Oleksandr is the rhythm guitarist and founder. His riffs provide a solid foundation for our sound.',
             'band-info-david': 'David is the lead guitarist and one of the founders. His virtuosic solos cut through the air, delivering unforgettable emotions.',
             'band-info-yaroslav': 'Yaroslav is our powerful drummer. His energetic rhythms hold the whole band together and electrify the audience.',
+            'band-info-lyubomyr': 'Lyubomyr is our cool bassist. His powerful bass lines add depth and drive to our music.',
             'events-title': 'Upcoming Events',
             'event3-title': 'City Day',
             'event3-date': '14.09.2025',
@@ -205,8 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector('.slider');
     if (slider) {
         const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.slider-prev');
-        const nextBtn = document.querySelector('.slider-next');
         const thumbnails = document.querySelectorAll('.thumbnail');
         let currentIndex = 0;
 
@@ -220,16 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
             currentIndex = index;
         }
 
-        prevBtn.addEventListener('click', () => {
-            let newIndex = (currentIndex - 1 + slides.length) % slides.length;
-            showSlide(newIndex);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            let newIndex = (currentIndex + 1) % slides.length;
-            showSlide(newIndex);
-        });
-
         thumbnails.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 showSlide(parseInt(thumb.dataset.slide));
@@ -237,7 +229,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Ініціалізація Luminous Lightbox
-        new LuminousGallery(document.querySelectorAll('.gallery-item'));
+        if (typeof LuminousGallery !== 'undefined') {
+            new LuminousGallery(document.querySelectorAll('.gallery-item'));
+        }
         
         showSlide(0);
     }
@@ -273,8 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const nextEventButton = document.querySelector(".next-event-button");
 
         // Show buttons if carousel is active
-        prevEventButton.style.display = 'block';
-        nextEventButton.style.display = 'block';
+        if(prevEventButton && nextEventButton) {
+            prevEventButton.style.display = 'block';
+            nextEventButton.style.display = 'block';
+        }
 
         const showEventSlide = (index) => {
             eventSlides.forEach((slide, i) => {
@@ -285,15 +281,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
 
-        prevEventButton.addEventListener("click", () => {
-            currentEventIndex = (currentEventIndex - 1 + eventSlides.length) % eventSlides.length;
-            showEventSlide(currentEventIndex);
-        });
+        if(prevEventButton && nextEventButton) {
+            prevEventButton.addEventListener("click", () => {
+                currentEventIndex = (currentEventIndex - 1 + eventSlides.length) % eventSlides.length;
+                showEventSlide(currentEventIndex);
+            });
 
-        nextEventButton.addEventListener("click", () => {
-            currentEventIndex = (currentEventIndex + 1) % eventSlides.length;
-            showEventSlide(currentEventIndex);
-        });
+            nextEventButton.addEventListener("click", () => {
+                currentEventIndex = (currentEventIndex + 1) % eventSlides.length;
+                showEventSlide(currentEventIndex);
+            });
+        }
 
         showEventSlide(currentEventIndex);
     }
