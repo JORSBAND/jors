@@ -472,49 +472,6 @@ main section p {
     transform: scale(1.05);
 }
 
-.countdown-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 5px;
-    flex-wrap: nowrap;
-    background-color: #333333;
-    border-radius: 10px;
-    padding: 10px 5px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border: 2px solid #FFA500; /* Змінено на оранжевий */
-    width: 100%;
-    max-width: 700px;
-    overflow-x: auto;
-}
-
-.countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: unset;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding: 0 3px;
-}
-
-.countdown-item span {
-    font-family: 'Exo 2', sans-serif;
-    font-size: 2em;
-    font-weight: 800;
-    color: #FFA500; /* Змінено на оранжевий */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-    white-space: nowrap;
-}
-
-.countdown-label {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.8em;
-    color: #FFC500; /* Світліший оранжевий */
-    margin-top: 3px;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
 /* Секція каруселі подій */
 .events-carousel-section {
     position: relative;
@@ -717,6 +674,82 @@ footer a:hover {
     display: none;
 }
 
+/* Streaming Platform Links */
+.streaming-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: -10px; /* Adjusted margin */
+    margin-bottom: 20px; /* Added margin */
+    flex-wrap: wrap;
+}
+
+.streaming-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s, color 0.3s;
+    border: 2px solid transparent;
+}
+
+.streaming-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.streaming-link svg {
+    width: 28px;
+    height: 28px;
+    transition: fill 0.3s;
+}
+
+.streaming-link.spotify {
+    background-color: #1DB954;
+    color: #FFFFFF;
+}
+.streaming-link.spotify:hover {
+    border-color: #1DB954;
+    background-color: #fff;
+    color: #1DB954;
+}
+ .streaming-link.spotify:hover svg {
+    fill: #1DB954;
+}
+
+.streaming-link.youtube-music {
+    background-color: #FF0000;
+    color: #FFFFFF;
+}
+.streaming-link.youtube-music:hover {
+    border-color: #FF0000;
+    background-color: #fff;
+    color: #FF0000;
+}
+.streaming-link.youtube-music:hover svg {
+    fill: #FF0000;
+}
+
+.streaming-link.apple-music {
+    background: #000;
+    color: #FFFFFF;
+    border: 2px solid #fff;
+}
+.streaming-link.apple-music:hover {
+    background: #fff;
+    color: #000;
+}
+.streaming-link.apple-music:hover svg {
+    fill: #000;
+}
+
+
 /* Медіазапити */
 @media (max-width: 992px) {
     header .logo h1 { font-size: 2.2em; }
@@ -729,8 +762,6 @@ footer a:hover {
     .control-button { padding: 8px 12px; font-size: 1.3em; }
     .music-release-section { max-width: 90%; }
     .album-announcement { font-size: 2em; }
-    .countdown-item span { font-size: 2em; }
-    .countdown-label { font-size: 0.8em; }
     .privacy-content h3, .contact-info h3 { font-size: 2em; }
     .privacy-content p, .contact-info p { font-size: 1.05em; }
     .social-links-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -765,10 +796,6 @@ footer a:hover {
     }
 
     .album-announcement { font-size: 1.8em; }
-    .countdown-container { gap: 10px; padding: 15px; }
-    .countdown-item span { font-size: 1.8em; }
-    .countdown-label { font-size: 0.7em; }
-    #seconds-countdown-item { display: none; }
     .privacy-content h3, .contact-info h3 { font-size: 1.8em; }
     .privacy-content p, .contact-info p { font-size: 0.9em; }
     .events-carousel { padding: 0; }
@@ -784,11 +811,13 @@ footer a:hover {
     main section h2, .events-title { font-size: 1.8em; }
     .social-links-grid { grid-template-columns: 1fr; }
     .album-announcement { font-size: 1.5em; }
-    .countdown-item span { font-size: 1.2em; }
-    .countdown-label { font-size: 0.6em; }
     .event-poster { max-width: 200px; }
     .event-details h4 { font-size: 1.5em; }
     .prev-event-button { left: 5px; }
     .next-event-button { right: 5px; }
     .thumbnail { width: 80px; height: 60px;}
+    .streaming-link {
+        width: 100%;
+        justify-content: center;
+    }
 }
