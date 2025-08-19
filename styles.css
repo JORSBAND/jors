@@ -130,25 +130,16 @@ nav ul li a.active {
 }
 
 /* Розділ Hero для Головної сторінки */
-body.home .hero {
+.hero {
     text-align: center;
     padding: 80px 20px;
-    background-image: url('images/cherep.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #FFA500; /* Змінено на оранжевий */
+    color: #FFA500;
     position: relative;
     z-index: 1;
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
 }
 
-body.home .hero::before {
+.hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -158,6 +149,25 @@ body.home .hero::before {
     background: rgba(0, 0, 0, 0.6);
     z-index: -1;
 }
+
+body.home .hero {
+    background-image: url('images/cherep.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.members-hero {
+    background-image: url('images/membaner.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 
 body.home .band-image {
     position: relative;
@@ -194,7 +204,7 @@ body.home .band-image:hover img {
     }
 }
 
-body.home .hero h2 {
+.hero h2 {
     font-family: 'Exo 2', sans-serif;
     font-size: 3.5em;
     color: #FFA500; /* Змінено на оранжевий */
@@ -202,7 +212,7 @@ body.home .hero h2 {
     letter-spacing: 2px;
 }
 
-body.home .hero p {
+.hero p {
     font-family: 'Lato', sans-serif;
     font-size: 1.3em;
     color: #FFC500; /* Світліший оранжевий */
@@ -279,22 +289,6 @@ main section p {
 .slide img {
     width: 100%;
     display: block;
-    cursor: pointer;
-}
-
-.slider-prev, .slider-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-}
-
-.slider-prev {
-    left: 15px;
-}
-
-.slider-next {
-    right: 15px;
 }
 
 .thumbnails {
@@ -752,12 +746,12 @@ footer a:hover {
 
 /* Медіазапити */
 @media (max-width: 992px) {
+    .hero h2 { font-size: 2.8em; }
+    .hero p { font-size: 1.1em; }
     header .logo h1 { font-size: 2.2em; }
     nav ul { gap: 15px; }
     nav ul li a { font-size: 1.1em; padding: 5px 10px; }
     .lang-toggle-btn { padding: 6px 10px; font-size: 0.9em; }
-    body.home .hero h2 { font-size: 2.8em; }
-    body.home .hero p { font-size: 1.1em; }
     main section h2, .events-title { font-size: 2.5em; }
     .control-button { padding: 8px 12px; font-size: 1.3em; }
     .music-release-section { max-width: 90%; }
@@ -780,9 +774,9 @@ footer a:hover {
     nav ul li { width: 100%; text-align: center; margin-bottom: 5px; }
     nav ul li a { display: block; padding: 10px; font-size: 1.1em; }
     .lang-toggle-btn { padding: 8px 12px; font-size: 1em; }
-    body.home .hero { padding: 60px 15px; }
-    body.home .hero h2 { font-size: 2.5em; }
-    body.home .hero p { font-size: 1em; }
+    .hero { padding: 60px 15px; }
+    .hero h2 { font-size: 2.5em; }
+    .hero p { font-size: 1em; }
     main section { padding: 30px 15px; margin: 30px auto; }
     main section h2, .events-title { font-size: 2em; }
     main section p { font-size: 1em; }
@@ -806,8 +800,8 @@ footer a:hover {
 
 @media (max-width: 480px) {
     header .logo h1 { font-size: 1.8em; }
-    body.home .hero h2 { font-size: 2em; }
-    body.home .hero p { font-size: 0.9em; }
+    .hero h2 { font-size: 2em; }
+    .hero p { font-size: 0.9em; }
     main section h2, .events-title { font-size: 1.8em; }
     .social-links-grid { grid-template-columns: 1fr; }
     .album-announcement { font-size: 1.5em; }
