@@ -141,10 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-info-yaroslav': 'Yaroslav is our powerful drummer. His energetic rhythms hold the whole band together and electrify the audience.',
             'band-info-lyubomyr': 'Lyubomyr is our cool bassist. His powerful bass lines add depth and drive to our music.',
             'events-title': 'Upcoming Events',
-            'event3-title': 'City Day',
-            'event3-date': '14.09.2025',
+            'event3-title': 'Dance Battle',
+            'event3-date': '2026',
             'event3-location': 'House of Culture',
-            'event3-entry': 'Free admission',
+            'event3-entry': 'Paid entrace',
             'views': 'Views'
         }
     };
@@ -291,3 +291,4 @@ document.addEventListener("DOMContentLoaded", () => {
         showEventSlide(currentEventIndex);
     }
 });
+
