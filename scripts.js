@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
             'event3-title': 'Dance Battle',
             'event3-date': '2026',
             'event3-location': 'House of Culture',
-            'event3-entry': 'Paid entrace',
+            'event3-entry': 'Paid entrance',
             'views': 'Views'
         }
     };
@@ -291,4 +291,5 @@ document.addEventListener("DOMContentLoaded", () => {
         showEventSlide(currentEventIndex);
     }
 });
+
 
