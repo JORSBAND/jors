@@ -93,10 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
             'band-info-yaroslav': 'Ярослав — наш потужний барабанщик. Його енергійні ритми тримають увесь гурт і заряджають публіку.',
             'band-info-lyubomyr': 'Любомир — наш крутий басист. Його потужні басові лінії додають нашій музиці глибини та драйву.',
             'events-title': 'Найближчі заходи',
-            'event3-title': 'День міста',
-            'event3-date': '14.09.2025',
+            'event3-title': 'Dance Battle',
+            'event3-date': '2026',
             'event3-location': 'Дім культури',
-            'event3-entry': 'Вхід безкоштовний',
+            'event3-entry': 'Платний вхід',
             'views': 'Переглядів'
         },
         'en': {
@@ -291,5 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showEventSlide(currentEventIndex);
     }
 });
+
 
 
